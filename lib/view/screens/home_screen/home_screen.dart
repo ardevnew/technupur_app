@@ -19,6 +19,8 @@ class _home_screenState extends State<home_screen> {
 
   @override
   void initState() {
+    context.read<category_controller_Cubit>().get_category_all();
+
     // TODO: implement initState
     super.initState();
   }
@@ -28,11 +30,9 @@ class _home_screenState extends State<home_screen> {
     return DefaultTabController(
       length: 0,
       child: Scaffold(
-        floatingActionButton: FloatingActionButton(onPressed: () {
-          context.read<category_controller_Cubit>().get_category_all();
-
-          print("Hello World");
-        }),
+        // floatingActionButton: FloatingActionButton(onPressed: () {
+        //   print("Hello World");
+        // }),
         appBar: AppBar(
           backgroundColor: Colors.white,
           elevation: 0,
@@ -181,16 +181,6 @@ class _home_screenState extends State<home_screen> {
                         )
                       : SizedBox.shrink(),
                 ),
-                Expanded(
-                  child: GridView.count(
-                    crossAxisCount: 2,
-                    childAspectRatio: 0.7,
-                    padding: EdgeInsets.all(8),
-                    children: [
-                      _productCard("Category", "\$0.00", "\$0.00", "sold out"),
-                    ],
-                  ),
-                ),
                 Container(
                   margin: EdgeInsets.all(12),
                   padding: EdgeInsets.all(12),
@@ -204,7 +194,7 @@ class _home_screenState extends State<home_screen> {
                       SizedBox(width: 10),
                       Expanded(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             Text(
                               "Free Shipping Over \$0",
@@ -217,56 +207,16 @@ class _home_screenState extends State<home_screen> {
                           ],
                         ),
                       ),
-                      Icon(Icons.link, color: Colors.white),
+                      Container(
+                        color: kPrimaryColor,
+                        child: SvgPicture(),
+                      ),
                     ],
                   ),
                 )
               ],
             );
           },
-        ),
-      ),
-    );
-  }
-
-  Widget _productCard(String category, String oldPrice, String newPrice, String status) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Expanded(
-              child: Container(
-                color: Colors.grey[300],
-                child: Center(child: Icon(Icons.image, size: 50)),
-              ),
-            ),
-            SizedBox(height: 5),
-            Text("Category", style: TextStyle(fontSize: 12, color: Colors.grey)),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  oldPrice,
-                  style: TextStyle(decoration: TextDecoration.lineThrough, color: Colors.grey, fontSize: 12),
-                ),
-                SizedBox(width: 5),
-                Text(
-                  newPrice,
-                  style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            SizedBox(height: 5),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-              decoration: BoxDecoration(
-                color: Colors.yellow,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Text(status, style: TextStyle(fontSize: 10)),
-            ),
-          ],
         ),
       ),
     );

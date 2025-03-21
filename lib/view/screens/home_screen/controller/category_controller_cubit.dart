@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
@@ -16,7 +14,7 @@ class category_controller_Cubit extends Cubit<category_controller_state> {
 
     Future.delayed(const Duration(seconds: 1));
     await All_category_Repo.get_all_categories().then((val) {
-      log('response ==  $val');
+      // log('response ==  $val');
 
       final List<category_model> category_model_data = (val).map((item) => category_model.fromJson(item)).toList();
 
